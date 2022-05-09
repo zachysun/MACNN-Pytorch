@@ -3,4 +3,4 @@ unofficial implementation of paper [“Multi-scale Attention Convolutional Neura
 
 ![macnn](https://github.com/ZachySun/MACNN-Pytorch/blob/main/imgs/macnn.JPG)
 
-[Tensorflow version](https://github.com/ZachySun/MACNN-Pytorch/blob/main/imgs/macnn.JPG)
+[Tensorflow version](https://github.com/wesley1001/MACNN)

@@ -8,8 +8,6 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 from torch.nn import init
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 class SEAttention1d(nn.Module):
     '''
     Modified from https://github.com/xmu-xiaoma666/External-Attention-pytorch/blob/master/model/attention/SEAttention.py
@@ -63,6 +61,8 @@ class macnn_block(nn.Module):
         self.bn = nn.BatchNorm1d(out_channels*3)
         self.relu = nn.ReLU()
 
+        self.se = SEAttention1d(out_channels*3,reduction=reduction)
+
     def forward(self,x):
 
         x1 = self.conv1(x)
@@ -74,12 +74,7 @@ class macnn_block(nn.Module):
         out = self.bn(x_con)
         out = self.relu(out)
 
-        _,c,_ = x_con.size()
-
-        se = SEAttention1d(c, self.reduction)
-        se.to(device)
-
-        out_se = se(out)
+        out_se = self.se(out)
 
         return out_se
 
